@@ -5,7 +5,7 @@
                 <div class="card">
                     <div class="card-header d-flex align-item-center justify-content-between">
                     	<h5 class="mb-0">Product category list</h5>
-                    	<a class="btn btn-primary btn-sm">Add new category</a>
+                    	<router-link :to="{name:'add-new-category'}" class="btn btn-primary btn-sm">Add new category</router-link>
                     </div>
 
                     <div class="card-body">
@@ -46,3 +46,4 @@
         }
     }
 </script>
+

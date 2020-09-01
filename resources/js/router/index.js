@@ -4,6 +4,7 @@ Vue.use(VueRouter);
 
 import Home from '../components/frontend/Home.vue';
 import CategoryList from '../components/frontend/category.vue';
+import CreateCategory from '../components/frontend/category/create_category.vue';
 
 const routes = new VueRouter({
 	mode:'history',
@@ -17,6 +18,11 @@ const routes = new VueRouter({
 			path:'/category',
 			component: CategoryList,
 			name:'category-list',
+		},
+		{
+			path:'/category/create',
+			component: CreateCategory,
+			name:'add-new-category',
 		}
 	]
 });
