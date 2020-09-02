@@ -14,11 +14,14 @@
                       			<form @submit.prevent="createCategory">
                       				<div class="form-group">
 										<label  for="">Category name</label>
-										<input v-model="name" placeholder="Category name" type="text" class="form-control" name="name">
+										<input v-model="categoryForm.name" placeholder="Category name" type="text" class="form-control" name="name" :class="{ 'is-invalid': categoryForm.errors.has('name') }">
+      									<has-error :form="categoryForm" field="name"></has-error>
                       				</div>
                       				<div class="form-group">
                       					<label  for="">Description</label>
-                      					<textarea placeholder="Description" type="text" class="form-control" v-model="description" name="description"></textarea>
+                      					<textarea placeholder="Description" type="text" class="form-control" v-model="categoryForm.description" name="description" :class="{ 'is-invalid': categoryForm.errors.has('description') }"></textarea>
+
+                      					<has-error :form="categoryForm" field="description"></has-error>
                       				</div>
                       				<div class="form-group">
 										<button type="submit" class="btn btn-success">Create Category</button>
@@ -34,20 +37,28 @@
 </template>
 
 <script>
+import { Form } from 'vform'
+
+
     export default {
         data(){
         	return {
-        		name:'',
-        		description:'',
+        		categoryForm: new Form({
+		        name: '',
+		        description: '',
+		      }),
         	}
         },
         methods: {
         	createCategory(){
-        		axios.post('/api/category',{name:this.name,description:this.description}).then(res=>{console.log(res);
-
-        		})
+        		this.categoryForm.post('/api/category')
+	        		.then(({ data }) => { 
+	        			this.categoryForm.name='';
+	        			this.categoryForm.description='';
+	        		})
+	    		}
         	}
-        }
+     
     }
 </script>
 
